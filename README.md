@@ -36,7 +36,7 @@ In this learning journey, I'm utilizing modern AI tools to assist in development
 
 - GitHub Copilot for code suggestions and pair programming
 
-- ChatGPT for conceptual understanding and problem-solving
+- Microsoft Copilot for conceptual understanding and problem-solving
 
 
 
