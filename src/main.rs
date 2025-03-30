@@ -1,5 +1,11 @@
 mod lexer;
-use lexer::{tokenize};
+mod parser;
+mod ast;
+
+
+use crate::lexer::tokenize;
+use crate::parser::Parser;
+
 
 fn main() {
     let source_code = r#"
@@ -16,7 +22,9 @@ fn main() {
     "#;
 
     let tokens = tokenize(source_code);
-    for token in tokens {
-        println!("{:?}", token);
-    }
+    println!("{:?}", tokens); // Debugging: Print the tokens
+    let mut parser = Parser::new(tokens);
+    let ast = parser.parse().unwrap();
+
+    println!("{:?}", ast);
 }

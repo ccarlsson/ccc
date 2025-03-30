@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Token {
     Keyword(String),       // e.g., "var", "begin", "end"
     Identifier(String),    // e.g., variable names like "a", "b"
@@ -47,16 +47,17 @@ pub fn tokenize(input: &str) -> Vec<Token> {
             }
             // String literals
             '"' => {
-                chars.next(); // Skip the opening quote
+                chars.next(); // Consume the opening quote
                 let mut string = String::new();
                 while let Some(&ch) = chars.peek() {
                     if ch == '"' {
+                        chars.next(); // Consume the closing quote
                         break;
+                    } else {
+                        string.push(ch);
+                        chars.next();
                     }
-                    string.push(ch);
-                    chars.next();
                 }
-                chars.next(); // Skip the closing quote
                 tokens.push(Token::StringLiteral(string));
             }
             '+' | '-' | '*' | '/' => {
@@ -171,6 +172,6 @@ mod tests {
         //     println!("Actual: {:?}, Expected: {:?}", actual, expected);
         // }
 
-        assert_eq!(tokens, expected_tokens, "Token mismatch. Check the output for differences.");
+        assert_eq!(tokens, expected_tokens, "Token mismatch. Uncomment the printout and check the output for differences.");
     }
 }
