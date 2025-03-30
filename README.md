@@ -58,3 +58,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 This is a work in progress. Updates and improvements will be made as I continue learning and implementing new features.
 
+
+## Build
+
+```bash
+> cargo run >> output.asm
+> nasm -f elf64 -o output.o output.asm
+> gcc -nostartfiles -nostdlib -no-pie -o a.out output.o
+
